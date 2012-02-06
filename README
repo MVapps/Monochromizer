@@ -1,0 +1,5 @@
+TODO:
+File resizer (camera-quality images are too big for matrix handling... crank it down since nobody wants an 8Mp mono image anyway.
+
+Second screen: Give image preview with threshold slider and *recalculate* option.
+Filename and save (saves to /sdcard/monochromizer/file.png)

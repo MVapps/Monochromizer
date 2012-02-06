@@ -66,6 +66,7 @@ public class MonochromizerActivity extends Activity {
 	            minValue = intArray[i];  
 	          }  
 	      }
+	      System.gc();
 	      int monoValue = ((minValue-0XFF000000 + maxValue-0xFF000000)/2)+0XFF000000;
 	    		  
 	      ////////////////////////////////////
@@ -96,6 +97,7 @@ public class MonochromizerActivity extends Activity {
 	        try {
 	         FileOutputStream outStream = new FileOutputStream(file);
 	         bmp.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+	         bmp.recycle();
 	         outStream.flush();
 	         outStream.close();
 	        }
