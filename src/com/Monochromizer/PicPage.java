@@ -12,33 +12,35 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
-public class MonochromizerActivity extends Activity {
+
+
+public class PicPage extends Activity implements OnSeekBarChangeListener{
+	public int SELECT_IMAGE;
 	private Bitmap bmp;
 	private int intArray[];
 	private int midArray[];
-
-	public int SELECT_IMAGE;
-
-	/** Called when the activity is first created. */
+	public int thresh;
+	SeekBar mSeekBar;
+	TextView threshold;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-	}
-
-	public void imageOpen(View view) {
+		setContentView(R.layout.page2);
+		mSeekBar = (SeekBar) findViewById(R.id.seekBar1);
+		threshold = (TextView) findViewById(R.id.thresh);
+		threshold.setText("50");
+		mSeekBar.setOnSeekBarChangeListener(this);
+		
+		
 		startActivityForResult(new Intent(Intent.ACTION_PICK,
 				android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI),
 				SELECT_IMAGE);
-		
-		Intent page2 = new Intent();
-		page2.setClassName(this, "com.monochromizer.PicPage");
-		startActivity(page2);
-
 	}
-
+	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -111,8 +113,20 @@ public class MonochromizerActivity extends Activity {
 			}
 	}
 
-	public void page2Pressed(View button) {
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean arg2) {
+		String what = Integer.toString(progress);
+		threshold.setText(what);
+		thresh = progress;
 		
+	}
 
+	public void onStartTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onStopTrackingTouch(SeekBar arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
